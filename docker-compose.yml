@@ -1,0 +1,32 @@
+version: '3'
+services:
+  zr-db:
+    image: dockerhaarlem/zaakregistratie-db:1.0      
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    ports:
+      - "5432:5432"
+  alfresco:
+    image: dockerhaarlem/alfresco:1.0      
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    ports:
+      - "8080:8080"
+  zr:
+    image: dockerhaarlem/zaakregistratiecomponent:1.1      
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    ports:
+      - "80:80"     
